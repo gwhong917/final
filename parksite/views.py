@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
+from .models import Test
 from django.db import connection
 import folium
 
@@ -22,11 +22,15 @@ def notifications(request):
 
 
 def tables(request):
-    return render(request, "tables.html")
+
+    data_table_test = Test.objects.all()
+    print(type(data_table_test))
+
+    return render(request, "tables.html", {
+        'data_table_test': data_table_test
+    })
 
 
 def user(request):
     return render(request, "user.html")
-
-
 
